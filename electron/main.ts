@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'node:path'
+import { createAppMenu } from './menu'
 
 const isDev = !app.isPackaged   // betrouwbaarder dan env-flag
 let mainWindow: BrowserWindow | null = null
@@ -39,6 +40,8 @@ function createWindow() {
   })
 
   mainWindow.on('closed', () => { mainWindow = null })
+
+  createAppMenu(mainWindow);
 }
 
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() })
